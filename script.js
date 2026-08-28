@@ -38,8 +38,8 @@ async function loadDashboardData() {
 loadDashboardData();
 
 
-// Refresh otomatis setiap 10 detik
-setInterval(loadDashboardData, 10000);
+// Refresh otomatis setiap 1 detik
+setInterval(loadDashboardData, 1000);
 /* =========================================
    DATA PROJECT
 ========================================= */
