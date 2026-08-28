@@ -1,4 +1,46 @@
 /* =========================================
+   GOOGLE SHEETS CONNECTION
+========================================= */
+
+const API_URL = "https://script.google.com/macros/s/AKfycbyaYjktldtO9GjvLgfZ5_pNlnTq3TPmL25wmEnDfoEykgN5AljnwILtLmdv7aUlmCzO/exec";
+
+
+async function loadDashboardData() {
+
+    try {
+
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error("Gagal mengambil data dari Spreadsheet");
+        }
+
+        const data = await response.json();
+
+        console.log("Data Spreadsheet:", data);
+
+
+        // Total Proyek
+        document.getElementById("totalProject").textContent =
+            data.totalProject;
+
+
+    } catch (error) {
+
+        console.error("Gagal mengambil data:", error);
+
+    }
+
+}
+
+
+// Load data saat website dibuka
+loadDashboardData();
+
+
+// Refresh otomatis setiap 10 detik
+setInterval(loadDashboardData, 10000);
+/* =========================================
    DATA PROJECT
 ========================================= */
 
