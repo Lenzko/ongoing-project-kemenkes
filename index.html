@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>On Going Project - Kemenkes RI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-left">
+            <h1>On Going Project</h1>
+            <p>Dashboard Monitoring Project</p>
+        </div>
+
+        <div class="header-right">
+            <span>🇮🇩</span>
+            <strong>Kementerian Kesehatan RI</strong>
+        </div>
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <!-- SUMMARY -->
+        <section class="summary">
+
+            <div class="card">
+                <span>Total Project</span>
+                <h2 id="totalProject">0</h2>
+            </div>
+
+            <div class="card">
+                <span>On Going</span>
+                <h2 id="ongoingProject">0</h2>
+            </div>
+
+            <div class="card">
+                <span>Selesai</span>
+                <h2 id="completedProject">0</h2>
+            </div>
+
+            <div class="card">
+                <span>Progress Rata-rata</span>
+                <h2 id="averageProgress">0%</h2>
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT TABLE -->
+        <section class="project-section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Daftar Project</h2>
+                    <p>Monitoring status project secara berkala</p>
+                </div>
+
+                <button onclick="loadData()">
+                    ↻ Refresh
+                </button>
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Project</th>
+                            <th>Penanggung Jawab</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="projectTable">
+
+                        <!-- Data akan dimasukkan oleh JavaScript -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 Kementerian Kesehatan Republik Indonesia
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
