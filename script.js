@@ -1,129 +1,520 @@
-// ================================
-// DATA PROJECT SEMENTARA
-// ================================
+/* =========================================
+   DATA PROJECT
+========================================= */
 
 const projects = [
+
     {
-        nama: "Digitalisasi Data Laboratorium",
-        pic: "Tim Informatika",
-        status: "On Going",
-        progress: 75
+        nama: "Pengembangan Sistem Informasi Surveilans Terpadu",
+        direktorat: "Ditjen P2P",
+        pic: "dr. Andi Putra",
+        periode: "01 Jan 2025 - 30 Nov 2025",
+        progress: 75,
+        status: "On Progress"
     },
 
     {
-        nama: "Dashboard Monitoring Project",
-        pic: "Tim Data",
-        status: "On Going",
-        progress: 60
+        nama: "Digitalisasi Puskesmas (SATUSEHAT Integration)",
+        direktorat: "Ditjen Yankes",
+        pic: "Ns. Rina Marlina",
+        periode: "15 Jan 2025 - 15 Des 2025",
+        progress: 60,
+        status: "On Progress"
     },
 
     {
-        nama: "Sistem Monitoring Puskesmas",
-        pic: "Tim IT",
-        status: "Selesai",
-        progress: 100
+        nama: "Penguatan Labkesda & Labkesmas",
+        direktorat: "Ditjen Kesmas",
+        pic: "Siti Nurhaliza, SKM",
+        periode: "01 Feb 2025 - 31 Okt 2025",
+        progress: 40,
+        status: "On Progress"
     },
 
     {
-        nama: "Aplikasi Manajemen Biobank",
-        pic: "Tim Research",
-        status: "On Going",
-        progress: 40
+        nama: "Sistem Monitoring Ketersediaan Obat Nasional",
+        direktorat: "Ditjen Farmalkes",
+        pic: "apt. Dimas Anggara",
+        periode: "01 Mar 2025 - 31 Des 2025",
+        progress: 20,
+        status: "Perlu Perhatian"
+    },
+
+    {
+        nama: "Penguatan Promosi Kesehatan Berbasis Digital",
+        direktorat: "Ditjen Kesmas",
+        pic: "drg. Bella Anindya",
+        periode: "10 Jan 2025 - 30 Sep 2025",
+        progress: 100,
+        status: "Selesai"
     }
+
 ];
 
 
-// ================================
-// LOAD DATA
-// ================================
 
-function loadData() {
+/* =========================================
+   RENDER TABLE
+========================================= */
+
+function renderTable(data = projects) {
 
     const table = document.getElementById("projectTable");
 
     table.innerHTML = "";
 
-    projects.forEach((project, index) => {
+    data.forEach((project, index) => {
+
+        let statusClass = "";
+
+        if (project.status === "Selesai") {
+
+            statusClass = "status-complete";
+
+        } else if (project.status === "Perlu Perhatian") {
+
+            statusClass = "status-attention";
+
+        } else {
+
+            statusClass = "status-progress";
+
+        }
+
 
         const row = document.createElement("tr");
 
-        let statusClass =
-            project.status === "Selesai"
-            ? "status-completed"
-            : "status-ongoing";
 
         row.innerHTML = `
-            <td>${index + 1}</td>
 
             <td>
-                <strong>${project.nama}</strong>
+                ${index + 1}
             </td>
+
+
+            <td>
+                ${project.nama}
+            </td>
+
+
+            <td>
+                ${project.direktorat}
+            </td>
+
 
             <td>
                 ${project.pic}
             </td>
 
-            <td>
-                <span class="status ${statusClass}">
-                    ${project.status}
-                </span>
-            </td>
 
             <td>
-                ${project.progress}%
+                ${project.periode}
             </td>
+
+
+            <td>
+
+                <div class="progress-wrapper">
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill"
+                            style="width: ${project.progress}%"
+                        ></div>
+
+                    </div>
+
+                    <span class="progress-number">
+                        ${project.progress}%
+                    </span>
+
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <span class="status ${statusClass}">
+
+                    ${project.status}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <button
+                    class="action-button"
+                    title="Menu"
+                >
+
+                    <i data-lucide="more-vertical"></i>
+
+                </button>
+
+            </td>
+
         `;
+
 
         table.appendChild(row);
 
     });
 
 
-    updateSummary();
+    lucide.createIcons();
 
 }
 
 
-// ================================
-// UPDATE SUMMARY
-// ================================
 
-function updateSummary() {
+/* =========================================
+   SEARCH
+========================================= */
 
-    const total = projects.length;
-
-    const ongoing = projects.filter(
-        project => project.status === "On Going"
-    ).length;
-
-    const completed = projects.filter(
-        project => project.status === "Selesai"
-    ).length;
-
-    const totalProgress = projects.reduce(
-        (sum, project) => sum + project.progress,
-        0
-    );
-
-    const average =
-        total > 0
-        ? Math.round(totalProgress / total)
-        : 0;
+const searchInput =
+    document.getElementById("searchInput");
 
 
-    document.getElementById("totalProject").textContent = total;
+searchInput.addEventListener(
+    "input",
+    function () {
 
-    document.getElementById("ongoingProject").textContent = ongoing;
-
-    document.getElementById("completedProject").textContent = completed;
-
-    document.getElementById("averageProgress").textContent =
-        average + "%";
-}
+        const keyword =
+            this.value.toLowerCase().trim();
 
 
-// ================================
-// JALANKAN SAAT WEBSITE DIBUKA
-// ================================
+        const filtered =
+            projects.filter(project =>
 
-loadData();
+                project.nama
+                    .toLowerCase()
+                    .includes(keyword)
+
+                ||
+
+                project.direktorat
+                    .toLowerCase()
+                    .includes(keyword)
+
+                ||
+
+                project.pic
+                    .toLowerCase()
+                    .includes(keyword)
+
+            );
+
+
+        renderTable(filtered);
+
+    }
+);
+
+
+
+/* =========================================
+   DONUT CHART
+========================================= */
+
+const progressCanvas =
+    document.getElementById("progressChart");
+
+
+new Chart(progressCanvas, {
+
+    type: "doughnut",
+
+    data: {
+
+        labels: [
+            "Selesai",
+            "On Progress",
+            "Terlambat",
+            "Belum Dimulai"
+        ],
+
+        datasets: [
+
+            {
+                data: [
+                    8,
+                    7,
+                    1,
+                    8
+                ],
+
+                backgroundColor: [
+                    "#0da39a",
+                    "#a7cc4c",
+                    "#f9c727",
+                    "#c7c7c7"
+                ],
+
+                borderWidth: 0
+            }
+
+        ]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        cutout: "60%",
+
+        plugins: {
+
+            legend: {
+                display: false
+            }
+
+        }
+
+    }
+
+});
+
+
+
+/* =========================================
+   MONTHLY LINE CHART
+========================================= */
+
+const monthlyCanvas =
+    document.getElementById("monthlyChart");
+
+
+new Chart(monthlyCanvas, {
+
+    type: "line",
+
+    data: {
+
+        labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "Mei",
+            "Jun"
+        ],
+
+        datasets: [
+
+            {
+                label: "Progress",
+
+                data: [
+                    20,
+                    38,
+                    54,
+                    63,
+                    74,
+                    90
+                ],
+
+                borderColor: "#0da39a",
+
+                backgroundColor:
+                    "rgba(13,163,154,0.10)",
+
+                fill: true,
+
+                tension: 0.35,
+
+                pointRadius: 4,
+
+                pointBackgroundColor: "#0da39a",
+
+                borderWidth: 2
+
+            }
+
+        ]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        plugins: {
+
+            legend: {
+                display: false
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                min: 0,
+
+                max: 100,
+
+                ticks: {
+
+                    callback: function(value) {
+
+                        return value + "%";
+
+                    },
+
+                    font: {
+                        size: 10
+                    }
+
+                },
+
+                grid: {
+                    color: "#edf0f0"
+                }
+
+            },
+
+            x: {
+
+                grid: {
+                    display: false
+                },
+
+                ticks: {
+                    font: {
+                        size: 10
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+
+
+/* =========================================
+   DIRECTORATE BAR CHART
+========================================= */
+
+const directorateCanvas =
+    document.getElementById("directorateChart");
+
+
+new Chart(directorateCanvas, {
+
+    type: "bar",
+
+    data: {
+
+        labels: [
+
+            "Setjen",
+            "Ditjen P2P",
+            "Ditjen Yankes",
+            "Ditjen Farmalkes",
+            "Ditjen Kesmas"
+
+        ],
+
+        datasets: [
+
+            {
+
+                data: [
+                    6,
+                    5,
+                    5,
+                    4,
+                    4
+                ],
+
+                backgroundColor: "#0da39a",
+
+                borderRadius: 2,
+
+                barThickness: 18
+
+            }
+
+        ]
+
+    },
+
+    options: {
+
+        indexAxis: "y",
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        plugins: {
+
+            legend: {
+                display: false
+            }
+
+        },
+
+        scales: {
+
+            x: {
+
+                beginAtZero: true,
+
+                ticks: {
+                    stepSize: 2,
+                    font: {
+                        size: 10
+                    }
+                },
+
+                grid: {
+                    color: "#edf0f0"
+                }
+
+            },
+
+            y: {
+
+                grid: {
+                    display: false
+                },
+
+                ticks: {
+                    font: {
+                        size: 10
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+renderTable();
+
+lucide.createIcons();
