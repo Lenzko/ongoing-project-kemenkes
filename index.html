@@ -6,86 +6,462 @@
 
     <title>On Going Project - Kemenkes RI</title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header class="header">
-        <div class="header-left">
-            <h1>On Going Project</h1>
-            <p>Dashboard Monitoring Project</p>
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo-area">
+
+            <div class="logo-symbol">
+                ✚
+            </div>
+
+            <div class="logo-text">
+                <strong>Kemenkes</strong>
+                <span>Kementerian Kesehatan</span>
+                <span>Republik Indonesia</span>
+            </div>
+
         </div>
 
-        <div class="header-right">
-            <span>🇮🇩</span>
-            <strong>Kementerian Kesehatan RI</strong>
+
+        <nav class="sidebar-menu">
+
+            <a href="#" class="menu-item active">
+                <i data-lucide="home"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i data-lucide="clipboard-list"></i>
+                <span>On Going Project</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i data-lucide="briefcase-business"></i>
+                <span>Proyek Selesai</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Monitoring & Evaluasi</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i data-lucide="file-text"></i>
+                <span>Laporan</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i data-lucide="folder"></i>
+                <span>Dokumen</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i data-lucide="calendar-days"></i>
+                <span>Kalender</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i data-lucide="bell"></i>
+                <span>Notifikasi</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i data-lucide="settings"></i>
+                <span>Pengaturan</span>
+            </a>
+
+        </nav>
+
+
+        <!-- QUOTE -->
+
+        <div class="quote-card">
+
+            <div class="quote-mark">“</div>
+
+            <p>
+                Sehat Negeriku,<br>
+                Tumbuh Indonesiaku
+            </p>
+
+            <div class="quote-logo">
+                ✚
+                <span>
+                    KEMENTERIAN KESEHATAN<br>
+                    REPUBLIK INDONESIA
+                </span>
+            </div>
+
+            <div class="quote-mark bottom">”</div>
+
         </div>
-    </header>
 
 
-    <!-- MAIN CONTENT -->
-    <main class="container">
+        <div class="sidebar-footer">
+            © 2025 Kemenkes RI
+        </div>
 
-        <!-- SUMMARY -->
-        <section class="summary">
+    </aside>
 
-            <div class="card">
-                <span>Total Project</span>
-                <h2 id="totalProject">0</h2>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div>
+
+                <h1>On Going Project</h1>
+
+                <p>
+                    Pantau dan kelola proyek yang sedang berjalan
+                </p>
+
             </div>
 
-            <div class="card">
-                <span>On Going</span>
-                <h2 id="ongoingProject">0</h2>
+
+            <div class="user-area">
+
+                <div class="notification">
+
+                    <i data-lucide="bell"></i>
+
+                    <span>3</span>
+
+                </div>
+
+
+                <div class="profile">
+
+                    <div class="profile-avatar">
+                        FA
+                    </div>
+
+                    <div class="profile-info">
+
+                        <strong>Faisal Al Aziz</strong>
+
+                        <span>Administrator</span>
+
+                    </div>
+
+                    <i data-lucide="chevron-down"></i>
+
+                </div>
+
             </div>
 
-            <div class="card">
-                <span>Selesai</span>
-                <h2 id="completedProject">0</h2>
+        </header>
+
+
+
+        <!-- ================= STAT CARDS ================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon teal">
+                    <i data-lucide="clipboard-list"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span>Total Proyek</span>
+
+                    <strong id="totalProject">
+                        24
+                    </strong>
+
+                    <small>
+                        Proyek berjalan
+                    </small>
+
+                </div>
+
             </div>
 
-            <div class="card">
-                <span>Progress Rata-rata</span>
-                <h2 id="averageProgress">0%</h2>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    <i data-lucide="chart-line"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span>Proyek Tepat Waktu</span>
+
+                    <strong id="onTimeProject">
+                        16
+                    </strong>
+
+                    <small>
+                        66.7% dari total proyek
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon yellow">
+                    <i data-lucide="hourglass"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span>Dalam Proses</span>
+
+                    <strong id="processProject">
+                        7
+                    </strong>
+
+                    <small>
+                        Proyek berjalan
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon teal">
+                    <i data-lucide="circle-alert"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <span>Perlu Perhatian</span>
+
+                    <strong id="attentionProject">
+                        1
+                    </strong>
+
+                    <small>
+                        Memerlukan tindak lanjut
+                    </small>
+
+                </div>
+
             </div>
 
         </section>
 
 
-        <!-- PROJECT TABLE -->
-        <section class="project-section">
 
-            <div class="section-header">
-                <div>
-                    <h2>Daftar Project</h2>
-                    <p>Monitoring status project secara berkala</p>
+        <!-- ================= CHARTS ================= -->
+
+        <section class="charts-grid">
+
+
+            <!-- DONUT -->
+
+            <div class="chart-card">
+
+                <h3>Ringkasan Progress Proyek</h3>
+
+                <div class="donut-wrapper">
+
+                    <div class="donut-chart">
+
+                        <canvas id="progressChart"></canvas>
+
+                        <div class="donut-center">
+
+                            <strong>24</strong>
+
+                            <span>Total</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-legend">
+
+                        <div>
+                            <span class="legend-dot teal-dot"></span>
+                            <label>Selesai</label>
+                            <strong>8 (33.3%)</strong>
+                        </div>
+
+                        <div>
+                            <span class="legend-dot green-dot"></span>
+                            <label>On Progress</label>
+                            <strong>7 (29.2%)</strong>
+                        </div>
+
+                        <div>
+                            <span class="legend-dot yellow-dot"></span>
+                            <label>Terlambat</label>
+                            <strong>1 (4.2%)</strong>
+                        </div>
+
+                        <div>
+                            <span class="legend-dot gray-dot"></span>
+                            <label>Belum Dimulai</label>
+                            <strong>8 (33.3%)</strong>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <button onclick="loadData()">
-                    ↻ Refresh
-                </button>
             </div>
 
 
-            <div class="table-container">
+
+            <!-- LINE CHART -->
+
+            <div class="chart-card">
+
+                <h3>Progres Proyek Bulanan</h3>
+
+                <div class="line-container">
+
+                    <canvas id="monthlyChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BAR CHART -->
+
+            <div class="chart-card">
+
+                <h3>Proyek Berdasarkan Direktorat</h3>
+
+                <div class="bar-container">
+
+                    <canvas id="directorateChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= PROJECT TABLE ================= -->
+
+        <section class="project-card">
+
+
+            <div class="project-header">
+
+                <div>
+
+                    <h2>Daftar On Going Project</h2>
+
+                </div>
+
+
+                <div class="project-actions">
+
+                    <div class="search-box">
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Cari proyek..."
+                        >
+
+                        <i data-lucide="search"></i>
+
+                    </div>
+
+
+                    <button class="filter-button">
+
+                        <i data-lucide="funnel"></i>
+
+                        Filter
+
+                    </button>
+
+
+                    <button class="add-button">
+
+                        <i data-lucide="plus"></i>
+
+                        Tambah Proyek
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-wrapper">
 
                 <table>
 
                     <thead>
+
                         <tr>
+
                             <th>No</th>
-                            <th>Project</th>
-                            <th>Penanggung Jawab</th>
-                            <th>Status</th>
+
+                            <th>Nama Proyek</th>
+
+                            <th>Direktorat</th>
+
+                            <th>PIC</th>
+
+                            <th>Periode</th>
+
                             <th>Progress</th>
+
+                            <th>Status</th>
+
+                            <th>Aksi</th>
+
                         </tr>
+
                     </thead>
 
-                    <tbody id="projectTable">
 
-                        <!-- Data akan dimasukkan oleh JavaScript -->
+                    <tbody id="projectTable">
 
                     </tbody>
 
@@ -95,16 +471,25 @@
 
         </section>
 
+
+
+        <!-- FOOTER -->
+
+        <footer class="main-footer">
+
+            <span>
+                Kementerian Kesehatan hadir untuk Indonesia Sehat
+            </span>
+
+        </footer>
+
+
     </main>
 
-
-    <!-- FOOTER -->
-    <footer>
-        © 2026 Kementerian Kesehatan Republik Indonesia
-    </footer>
+</div>
 
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
